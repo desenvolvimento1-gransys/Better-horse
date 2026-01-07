@@ -1,0 +1,27 @@
+{
+  "name": "default",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.12.4",
+    "core-js": "^3.8.1",
+    "mdi-vue": "^1.8.1",
+    "nuxt": "^2.14.12",
+    "qrcode": "^1.5.4",
+    "vue-image-magnifier": "^0.2.1",
+    "vue-the-mask": "^0.11.1",
+    "vue-viacep": "^1.0.4",
+    "vue-zoom-on-hover": "^1.0.5",
+    "vueperslides": "^2.10.8",
+    "vuex": "^3.5.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.2"
+  }
+}
