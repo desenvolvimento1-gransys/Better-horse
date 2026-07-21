@@ -3,9 +3,10 @@
     <v-row :style="layout.topBar.sizes">
       <v-col cols="3" class="mr-5 psb-3" align="center">
         <router-link to="/">
+     
           <img
             :style="layout.topBar.topBarLogoImg"
-            :src="layout.topBar.logoUrl"
+            :src="layout.topBar.logoUrl ? layout.topBar.logoUrl : '.../images/logo.png'"
             alt="Logo da topBar"
           />
         </router-link>
@@ -85,6 +86,7 @@ export default {
     };
   },
   computed: {
+    
     ...mapState("Layouts", ["layout", "config"]),
     ...mapState("User", ["user"]),
     ...mapGetters("Cart", ["totalAmountInCart"]),

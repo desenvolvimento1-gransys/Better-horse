@@ -38,9 +38,9 @@ let merchantInfo = {
 
 };
 //Muda logo do topo
-let logo = "/img/logo.jpg";
+let logo = "images/btt.jpg";
 //Muda logo do footer
-let logoAlt = "/img/logo.jpg";
+let logoAlt = "images/btt.jpg";
 
 export default () => ({
     config: {
