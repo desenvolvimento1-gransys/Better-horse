@@ -1,6 +1,9 @@
 # Railway Nixpacks configuration
 # Node version is auto-detected from package.json "engines" field (16.x)
 
+[variables]
+NODE_OPTIONS = "--openssl-legacy-provider"
+
 [phases.install]
 cmds = ["npm ci"]
 
