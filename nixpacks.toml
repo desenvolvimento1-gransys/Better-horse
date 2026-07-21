@@ -1,8 +1,5 @@
 # Railway Nixpacks configuration
-# Node 16.x as defined in package.json engines and .nvmrc
-
-[phases.setup]
-nixPkgs = ["nodejs-16_x", "npm-8_x"]
+# Node version is auto-detected from package.json "engines" field (16.x)
 
 [phases.install]
 cmds = ["npm ci"]
