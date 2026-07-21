@@ -13,6 +13,7 @@ const setExitDialog = function ({ commit }, value) {
 const whenAppInit = function () {
     $nuxt.$store.dispatch("User/checkLoged");
     $nuxt.$store.dispatch("Cart/showCartItems", "empty");
+    $nuxt.$store.dispatch("Layouts/fetchLayout");
 }
 
 export default {
