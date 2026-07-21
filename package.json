@@ -2,6 +2,9 @@
   "name": "default",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -10,6 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.4",
+    "@nuxtjs/vuetify": "^1.11.2",
     "core-js": "^3.8.1",
     "mdi-vue": "^1.8.1",
     "nuxt": "^2.14.12",
@@ -20,8 +24,5 @@
     "vue-zoom-on-hover": "^1.0.5",
     "vueperslides": "^2.10.8",
     "vuex": "^3.5.1"
-  },
-  "devDependencies": {
-    "@nuxtjs/vuetify": "^1.11.2"
   }
 }

@@ -2,7 +2,13 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   ssr: true,
-  target: "static",
+  target: "server",
+
+  server: {
+    host: "0.0.0.0",
+    port: process.env.PORT || 3000,
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: "%s",
@@ -103,11 +109,7 @@ export default {
   loading: "~/components/loading.vue",
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [
-    "@/assets/css/main.css",
-    "@/assets/css/main.scss",
-    "vuetify/dist/vuetify.css",
-  ],
+  css: ["@/assets/css/main.css", "vuetify/dist/vuetify.css"],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
@@ -135,13 +137,25 @@ export default {
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
-    customVariables: ["~/assets/css/main.scss"],
+    customVariables: ["~/assets/variables.scss"],
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     splitChunks: {
       layouts: true,
+    },
+    loaders: {
+      sass: {
+        sassOptions: {
+          fiber: false,
+        },
+      },
+      scss: {
+        sassOptions: {
+          fiber: false,
+        },
+      },
     },
   },
 
