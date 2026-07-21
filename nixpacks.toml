@@ -1,13 +1,14 @@
 # Railway Nixpacks configuration
-# Fixes: fibers native addon build failure on Node 22
-# Node version is controlled by NIXPACKS_NODE_VERSION env var (set to 16 in Railway dashboard)
-# or by the "engines" field in package.json
+# Node 16.x as defined in package.json engines and .nvmrc
+
+[phases.setup]
+nixPkgs = ["nodejs-16_x", "npm-8_x"]
 
 [phases.install]
-cmds = ["yarn install --frozen-lockfile"]
+cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["yarn build"]
+cmds = ["npm run build"]
 
 [start]
-cmd = "yarn start"
+cmd = "npm run start"
