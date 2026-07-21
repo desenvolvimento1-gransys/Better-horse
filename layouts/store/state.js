@@ -479,11 +479,11 @@ export default () => ({
                 frameRate: 3 / 8,
                 items: [
                     {
-                        src: "/banner/capadosite1.png",
+                        src:
+                            "https://images.pexels.com/photos/4050345/pexels-photo-4050345.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
                     },
-                    {
-                        src: "/banner/capasite2.gif",
-                    }
+
+
                 ]
             },
             information: {
