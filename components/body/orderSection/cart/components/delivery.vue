@@ -15,7 +15,7 @@
         <v-text-field
           type="text"
           v-model="cep"
-          @input="checkDelivery(cep)"
+          @input="onCepInput(cep)"
           :color="layout.cart.cartScreen.resume.freight.input.color"
           label="CEP"
         ></v-text-field>
@@ -83,6 +83,22 @@
             </v-col>
           </div>
         </div>
+
+        <div class="me-block">
+          <p class="me-title">Envio</p>
+          <melhor-envio-options
+            :options="cartOptions"
+            :spinner="melhorEnvioState.cart.spinner"
+            :error="melhorEnvioState.cart.error"
+            :consulted="!!melhorEnvioState.cart.cep"
+            :radio-color="layout.cart.cartScreen.resume.freight.input.color"
+            selectable
+            v-model="melhorEnvioService"
+          />
+          <p v-if="isCartQuoteExpired" class="me-expired">
+            Cotacao expirada. Informe o CEP novamente para atualizar o valor.
+          </p>
+        </div>
       </span>
     </span>
   </span>
@@ -91,10 +107,12 @@
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
 import cartDialog from "@/components/body/orderSection/cart/components/cartDialogFretch";
+import melhorEnvioOptions from "@/components/body/shipping/melhorEnvioOptions";
 
 export default {
   components: {
     cartDialog,
+    melhorEnvioOptions,
   },
   data: function () {
     return {
@@ -115,15 +133,33 @@ export default {
       if (this.list.length > 0) {
         let arrayNum = this.list.length - 1;
         this.cep = this.list[arrayNum].cep;
-        this.checkDelivery(this.cep);
+        this.onCepInput(this.cep);
       }
     },
   },
   methods: {
     ...mapActions("Delivery", ["checkDelivery"]),
     ...mapActions("Addressess", ["setList"]),
+    ...mapActions("MelhorEnvio", ["quoteCart", "selectCartService"]),
+    // Um unico ponto de entrada para os dois calculos de frete: o legado
+    // Gransys e a cotacao do Melhor Envio.
+    onCepInput(cep) {
+      this.checkDelivery(cep);
+      this.quoteCart(cep);
+    },
   },
   computed: {
+    melhorEnvioService: {
+      get() {
+        return this.$store.state.MelhorEnvio.cart.selectedServiceId;
+      },
+      set(value) {
+        this.selectCartService(value);
+      },
+    },
+    melhorEnvioState() {
+      return this.$store.state.MelhorEnvio;
+    },
     deliveryType: {
       get() {
         return this.$store.state.Delivery.deliveryType;
@@ -133,6 +169,7 @@ export default {
       },
     },
     ...mapGetters("Delivery", ["deliveryList"]),
+    ...mapGetters("MelhorEnvio", ["cartOptions", "isCartQuoteExpired"]),
     ...mapGetters("Cart", ["totalProductsValue"]),
     ...mapState("Layouts", ["config", "layout", "fobOptions"]),
     ...mapState("Delivery", ["consult", "spinner"]),
@@ -149,6 +186,25 @@ export default {
 </script>
 
 <style>
+.me-block {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.me-title {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.me-expired {
+  font-size: 12px;
+  color: #c62828;
+  margin-top: 6px;
+}
+
 .card-frete {
   background: #7a0a18;
   width: 100%;

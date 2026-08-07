@@ -105,6 +105,15 @@
             </v-col>
           </v-row>
         </div>
+
+        <div v-if="isOpen" class="pt-2">
+          <melhor-envio-options
+            :options="productOptions"
+            :spinner="melhorEnvioState.product.spinner"
+            :error="melhorEnvioState.product.error"
+            :consulted="!!melhorEnvioState.product.cep"
+          />
+        </div>
       </v-container>
     </v-card>
   </span>
@@ -113,6 +122,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
 import Loading from "@/components/loading";
+import melhorEnvioOptions from "@/components/body/shipping/melhorEnvioOptions";
 export default {
   data: function () {
     return {
@@ -122,26 +132,38 @@ export default {
   },
   components: {
     Loading,
+    melhorEnvioOptions,
   },
   computed: {
     ...mapState("Product", ["product", "deliverySpinner", "deliveryConsult"]),
+    ...mapGetters("MelhorEnvio", ["productOptions"]),
+    melhorEnvioState() {
+      return this.$store.state.MelhorEnvio;
+    },
   },
   watch: {
     cep: function () {
       if (this.cep && this.cep.length <= 0) {
         this.isOpen = false;
+        this.resetProductQuote();
       } else if (!this.cep) {
         this.isOpen = false;
+        this.resetProductQuote();
       }
     },
   },
+  beforeDestroy() {
+    this.resetProductQuote();
+  },
   methods: {
     ...mapActions("Product", ["calculateProductDelivery"]),
+    ...mapActions("MelhorEnvio", ["quoteProduct", "resetProductQuote"]),
     cleanAndCalculate(cep) {
       if (cep) {
         var res = cep.replace(/\D/g, "");
 
         this.calculateProductDelivery(res);
+        this.quoteProduct(res);
 
         this.isOpen = true;
 

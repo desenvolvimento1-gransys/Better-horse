@@ -5,6 +5,7 @@ import Search from '@/modules/Search/store/index'
 import Product from '@/modules/Product/store/index'
 import Cart from '@/modules/Cart/store/index'
 import Delivery from '@/modules/Delivery/store/index'
+import MelhorEnvio from '@/modules/MelhorEnvio/store/index'
 import User from '@/modules/User/store/index'
 import Utils from '@/modules/Utils/store/index'
 import People from '@/modules/People/store/index'
@@ -20,6 +21,7 @@ const modules = {
     Product,
     Cart,
     Delivery,
+    MelhorEnvio,
     User,
     Utils,
     People,
