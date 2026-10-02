@@ -7,6 +7,8 @@
     padding: 0px !important;
 }
 
-body {
+/* overflow-x no html (não no body): body com overflow próprio vira um segundo
+   scroll container e trava a rolagem no mobile */
+html {
     overflow-x: hidden;
 }
