@@ -341,7 +341,7 @@ export default () => ({
                 },
                 logoUrl: logo,
                 logoStyle: {
-                    width: '90px !important',
+                    width: '60px !important',
                 },
                 navIcon: {
                     icon: 'fas fa-bars',
